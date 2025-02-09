@@ -25,7 +25,7 @@ public static class ColorUtils
         { (int)Color.White, 0x000000 }
     };
 
-    public static int GetPaletteColor(this Color color) => Palette[(int)color];
+    public static int GetPaletteColor(this Color color) => Palette.Keys.ToList().IndexOf((int)color);
 
     public static readonly Dictionary<string, Color> LineAbbreviationsToColors = new()
     {
