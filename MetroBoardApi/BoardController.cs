@@ -8,9 +8,11 @@ namespace MetroBoardApi;
 [Route("[controller]")]
 public class BoardController : ControllerBase
 {
-    [HttpGet("Stations")]
-    public async Task<Matrix> GetStationsAsync()
+    private StationService StationService { get; } = new();
+
+    [HttpGet("CurrentScreen")]
+    public async Task<Matrix> GetCurrentScreen()
     {
-        var stations = StationService
+        return await StationService.DrawStationScreenAsync(2);
     }
 }

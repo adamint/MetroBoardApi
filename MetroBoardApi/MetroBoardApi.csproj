@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <RuntimeHostConfigurationOption Include="System.Text.Json.Serialization.RespectNullableAnnotationsDefault" Value="true" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.1"/>
     </ItemGroup>
 

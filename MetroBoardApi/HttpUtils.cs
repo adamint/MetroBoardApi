@@ -2,9 +2,9 @@ namespace MetroBoardApi;
 
 public class HttpUtils
 {
-    private const string WmataApiKey = "";
+    private static readonly string WmataApiKey = Environment.GetEnvironmentVariable("WMATA_API_KEY") ?? throw new ArgumentException("WMATA_API_KEY environment variable not set");
 
-    private static HttpClient s_client = new()
+    private static readonly HttpClient s_client = new()
     {
         BaseAddress = new Uri("https://api.wmata.com"),
         DefaultRequestHeaders = { { "api_key", WmataApiKey } }
