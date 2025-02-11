@@ -22,7 +22,7 @@ public static class ColorUtils
         { (int)Color.Red, 0xFF0000 },
         { (int)Color.Silver, 0xC0C0C0 },
         { (int)Color.Yellow, 0xFFFF00 },
-        { (int)Color.White, 0x000000 }
+        { (int)Color.White, 0xf2f5f5 }
     };
 
     public static int GetPaletteColor(this Color color) => Palette.Keys.ToList().IndexOf((int)color);

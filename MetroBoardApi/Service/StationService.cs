@@ -13,7 +13,7 @@ public class StationService
         const int displayHeight = 32;
         _stationsInfo ??= await GetStationsInfo(displayWidth, displayHeight);
 
-        var matrix = Matrix.Create();
+        var matrix = Matrix.Create(ScreenService.SleepTimeSeconds);
 
         // draw stations
         foreach (var (station, coordinate) in _stationsInfo.StationsToNormalizedCoordinates)
@@ -191,7 +191,7 @@ public class StationService
             new Point(windowXStart, windowYStart + windowWidth)
         ], 1));
 
-        matrix.TextLabels.Add(new TextLabel(trainPositions.Length.ToString(), new Point(3, 6)));
+        matrix.TextLabels.Add(TextLabel.Create(trainPositions.Length.ToString(), new Point(3, 6)));
     }
 
     private static async Task<TrainPosition[]> GetTrainPositionsAsync()
