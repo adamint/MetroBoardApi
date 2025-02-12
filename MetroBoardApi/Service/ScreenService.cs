@@ -41,7 +41,7 @@ public class ScreenService : IHostedService, IDisposable
     private static int GetSleepTime()
     {
         var sleepTime = Environment.GetEnvironmentVariable("SLEEP_TIME");
-        return int.TryParse(sleepTime, out var sleepTimeSeconds) ? sleepTimeSeconds : 5;
+        return int.TryParse(sleepTime, out var sleepTimeSeconds) ? sleepTimeSeconds : 10;
     }
 }
 

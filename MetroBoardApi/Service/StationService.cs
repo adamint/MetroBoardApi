@@ -27,6 +27,22 @@ public class StationService
         var trainPositions = await GetTrainPositionsAsync();
         DrawTrainCount(matrix, trainPositions);
 
+        // blink stations with an arrival in the next minute
+        var trainPredictions = await GetTrainPredictionsAsync();
+        var stationsWithArrivalsNow = trainPredictions
+            .Where(t => t.Min == "BRD")
+            .ToList();
+
+        foreach (var prediction in stationsWithArrivalsNow)
+        {
+            var station = _stationsInfo.StationsToNormalizedCoordinates.Keys.FirstOrDefault(s => s.Code == prediction.LocationCode);
+            if (station is not null)
+            {
+                var coordinate = _stationsInfo.StationsToNormalizedCoordinates[station];
+                matrix.PointsToBlink.Add(new Point(coordinate.X, coordinate.Y));
+            }
+        }
+
         return matrix;
 
         static int GetSelectedLineFill(Station station, int remainingTimesToDraw)
@@ -233,6 +249,14 @@ public class StationService
         Debug.Assert(response is not null);
 
         return response.Stations;
+    }
+
+    private static async Task<TrainPrediction[]> GetTrainPredictionsAsync()
+    {
+        var response = await HttpUtils.GetAsync<TrainPredictionResponse>("/StationPrediction.svc/json/GetPrediction/All");
+        Debug.Assert(response is not null);
+
+        return response.Trains;
     }
 }
 

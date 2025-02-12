@@ -2,11 +2,20 @@ namespace MetroBoardApi.Model;
 using PixelColor = Color;
 
 [Serializable]
-public record Matrix(List<Pixel> Pixels, List<Polygon> Polygons, List<TextLabel> TextLabels, int SleepTime)
+public record Matrix(
+    List<Pixel> Pixels,
+    List<Polygon> Polygons,
+    List<TextLabel> TextLabels,
+    int SleepTime,
+    List<Point> PointsToBlink,
+    double BlinkRate,
+    string ApplicationVersion)
 {
+    private static readonly string Version = Guid.NewGuid().ToString();
+
     public static Matrix Create(int sleepTime)
     {
-        return new Matrix([], [], [], sleepTime);
+        return new Matrix([], [], [], sleepTime, [], 0.75, Version);
     }
 }
 
