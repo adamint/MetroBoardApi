@@ -48,6 +48,14 @@ public class ArrivalsService
                 var arrival = arrivals[i];
                 var lineColor = ColorUtils.LineAbbreviationsToColors.GetValueOrDefault(arrival.Line, Color.Green);
 
+                if (string.IsNullOrEmpty(arrival.Min))
+                {
+                    arrival = arrival with
+                    {
+                        Min = "?"
+                    };
+                }
+
                 var lineStartY = startingY + 4 + i * lineHeight;
                 matrix.Pixels.AddRange(PolygonExtensions.CreateRect(startingX, startingY + i * lineHeight + 1, 2, 6, lineColor.GetPaletteColor()));
                 matrix.TextLabels.Add(TextLabel.Create(GetDestinationName(arrival.Destination, arrival.Min), new Point(startingX + 4, lineStartY)));

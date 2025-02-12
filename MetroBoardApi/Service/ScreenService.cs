@@ -3,7 +3,7 @@ namespace MetroBoardApi.Service;
 public class ScreenService : IHostedService, IDisposable
 {
     private Timer? _timer;
-    public const int SleepTimeSeconds = 60;
+    public static int SleepTimeSeconds = GetSleepTime();
 
     public ScreenDisplay CurrentScreen { get; } = new(Screen.Stations, 4);
 
@@ -36,6 +36,12 @@ public class ScreenService : IHostedService, IDisposable
     public void Dispose()
     {
         _timer?.Dispose();
+    }
+
+    private static int GetSleepTime()
+    {
+        var sleepTime = Environment.GetEnvironmentVariable("SLEEP_TIME");
+        return int.TryParse(sleepTime, out var sleepTimeSeconds) ? sleepTimeSeconds : 5;
     }
 }
 

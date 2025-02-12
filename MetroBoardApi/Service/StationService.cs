@@ -168,21 +168,44 @@ public class StationService
 
     private static void DrawTrainCount(Matrix matrix, TrainPosition[] trainPositions)
     {
-        const int trainXStart = 15;
+        var xOffset = trainPositions.Length < 100 ? 2 : 0;
+        var trainXStart = 15 + xOffset;
         const int trainYStart = 2;
         const int trainYEnd = 9;
-
-        matrix.Polygons.Add(new Polygon([
-            new Point(trainXStart, trainYStart),
-            new Point(trainXStart + 10, trainYStart),
-            new Point(trainXStart + 17, trainYEnd),
-            new Point(trainXStart + 10, trainYEnd),
-            new Point(trainXStart, trainYEnd)
-        ], 1));
-
-        var windowXStart = trainXStart + 7;
-        var windowYStart = trainYStart + 2;
         const int windowWidth = 2;
+
+        int windowXStart;
+        int windowYStart;
+
+        if (trainPositions.Length >= 100)
+        {
+            trainXStart += 6;
+
+            matrix.Polygons.Add(new Polygon([
+                new Point(trainXStart, trainYStart),
+                new Point(trainXStart + 6, trainYStart),
+                new Point(trainXStart + 13, trainYEnd),
+                new Point(trainXStart + 6, trainYEnd),
+                new Point(trainXStart, trainYEnd)
+            ], 1));
+
+            windowXStart = trainXStart + 2;
+            windowYStart = trainYStart + 2;
+        }
+        else
+        {
+            matrix.Polygons.Add(new Polygon([
+                new Point(trainXStart, trainYStart),
+                new Point(trainXStart + 10, trainYStart),
+                new Point(trainXStart + 17, trainYEnd),
+                new Point(trainXStart + 10, trainYEnd),
+                new Point(trainXStart, trainYEnd)
+            ], Color.Blue.GetPaletteColor()));
+
+            windowXStart = trainXStart + 7;
+            windowYStart = trainYStart + 2;
+        }
+
 
         matrix.Polygons.Add(new Polygon([
             new Point(windowXStart, windowYStart),
@@ -191,7 +214,9 @@ public class StationService
             new Point(windowXStart, windowYStart + windowWidth)
         ], 1));
 
-        matrix.TextLabels.Add(TextLabel.Create(trainPositions.Length.ToString(), new Point(3, 6)));
+        int textXStart = 3 + xOffset;
+        int textYStart = 6;
+        matrix.TextLabels.Add(TextLabel.Create(trainPositions.Length.ToString(), new Point(textXStart, textYStart)));
     }
 
     private static async Task<TrainPosition[]> GetTrainPositionsAsync()
