@@ -1,4 +1,4 @@
-namespace MetroBoardApi.Service;
+namespace MetroBoard.Api.Service;
 
 public class ScreenService : IHostedService, IDisposable
 {

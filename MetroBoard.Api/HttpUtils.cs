@@ -1,4 +1,4 @@
-namespace MetroBoardApi;
+namespace MetroBoard.Api;
 
 public class HttpUtils
 {

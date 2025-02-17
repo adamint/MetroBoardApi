@@ -1,6 +1,6 @@
-using MetroBoardApi.Model;
+using MetroBoard.Api.Model;
 
-namespace MetroBoardApi;
+namespace MetroBoard.Api;
 
 public static class PolygonExtensions
 {

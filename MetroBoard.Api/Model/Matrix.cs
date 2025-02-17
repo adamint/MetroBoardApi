@@ -1,4 +1,4 @@
-namespace MetroBoardApi.Model;
+namespace MetroBoard.Api.Model;
 using PixelColor = Color;
 
 [Serializable]

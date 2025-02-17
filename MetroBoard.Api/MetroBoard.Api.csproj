@@ -4,11 +4,16 @@
         <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>MetroBoard.Api</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
         <RuntimeHostConfigurationOption Include="System.Text.Json.Serialization.RespectNullableAnnotationsDefault" Value="true" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.1"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\MetroBoard.ServiceDefaults\MetroBoard.ServiceDefaults.csproj" />
     </ItemGroup>
 
 </Project>

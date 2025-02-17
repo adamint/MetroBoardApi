@@ -1,7 +1,8 @@
-using MetroBoardApi.Service;
+using MetroBoard.Api.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 builder.Services.AddSingleton<ScreenService>();

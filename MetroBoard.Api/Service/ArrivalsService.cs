@@ -1,7 +1,7 @@
 using System.Diagnostics;
-using MetroBoardApi.Model;
+using MetroBoard.Api.Model;
 
-namespace MetroBoardApi.Service;
+namespace MetroBoard.Api.Service;
 
 public class ArrivalsService
 {

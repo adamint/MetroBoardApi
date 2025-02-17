@@ -1,8 +1,8 @@
-using MetroBoardApi.Model;
-using MetroBoardApi.Service;
+using MetroBoard.Api.Model;
+using MetroBoard.Api.Service;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MetroBoardApi;
+namespace MetroBoard.Api;
 
 [ApiController]
 [Route("[controller]")]

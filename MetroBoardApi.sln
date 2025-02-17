@@ -1,6 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroBoardApi", "MetroBoardApi\MetroBoardApi.csproj", "{E3FFAA8A-F677-44D4-8A1B-65BACA6F6A13}"
+# 
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroBoard.Api", "MetroBoard.Api\MetroBoard.Api.csproj", "{E3FFAA8A-F677-44D4-8A1B-65BACA6F6A13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroBoard.AppHost", "MetroBoard.AppHost\MetroBoard.AppHost.csproj", "{95A58267-1D30-482B-A8EA-A2B9B24868B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroBoard.ServiceDefaults", "MetroBoard.ServiceDefaults\MetroBoard.ServiceDefaults.csproj", "{41721965-B032-4429-B3C0-CA0F316D2D7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +17,13 @@ Global
 		{E3FFAA8A-F677-44D4-8A1B-65BACA6F6A13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3FFAA8A-F677-44D4-8A1B-65BACA6F6A13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3FFAA8A-F677-44D4-8A1B-65BACA6F6A13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95A58267-1D30-482B-A8EA-A2B9B24868B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95A58267-1D30-482B-A8EA-A2B9B24868B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95A58267-1D30-482B-A8EA-A2B9B24868B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95A58267-1D30-482B-A8EA-A2B9B24868B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41721965-B032-4429-B3C0-CA0F316D2D7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41721965-B032-4429-B3C0-CA0F316D2D7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41721965-B032-4429-B3C0-CA0F316D2D7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41721965-B032-4429-B3C0-CA0F316D2D7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
