@@ -6,11 +6,8 @@ namespace MetroBoard.Api;
 
 [ApiController]
 [Route("[controller]")]
-public class BoardController(ScreenService screenService) : ControllerBase
+public class BoardController(ScreenService screenService, StationService stationService, ArrivalsService arrivalsService) : ControllerBase
 {
-    private StationService StationService { get; } = new();
-    private ArrivalsService ArrivalsService { get; } = new();
-
     [HttpGet("CurrentScreen")]
     public async Task<Matrix> GetCurrentScreen()
     {
@@ -19,11 +16,11 @@ public class BoardController(ScreenService screenService) : ControllerBase
 
         if (screen.Screen == Screen.Arrivals)
         {
-            return await ArrivalsService.DrawArrivalsScreenAsync();
+            return await arrivalsService.DrawArrivalsScreenAsync();
         }
         else
         {
-            return await StationService.DrawStationScreenAsync(screen.TimesRemaining);
+            return await stationService.DrawStationScreenAsync(screen.TimesRemaining);
         }
     }
 }

@@ -15,7 +15,7 @@ public class ArrivalsService
             .Take(2)
             .ToArray();
 
-        var matrix = Matrix.Create(ScreenService.SleepTimeSeconds);
+        var matrix = Matrix.Create(Settings.SleepTimeSeconds);
         const int headerY = 4;
         matrix.TextLabels.Add(TextLabel.Create("LN", new Point(0, headerY)));
         matrix.TextLabels.Add(TextLabel.Create("DEST", new Point(15, headerY)));

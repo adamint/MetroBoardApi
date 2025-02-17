@@ -3,14 +3,13 @@ namespace MetroBoard.Api.Service;
 public class ScreenService : IHostedService, IDisposable
 {
     private Timer? _timer;
-    public static int SleepTimeSeconds = GetSleepTime();
 
     public ScreenDisplay CurrentScreen { get; } = new(Screen.Stations, 4);
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
         _timer = new Timer(ChangeScreen, null, TimeSpan.Zero,
-            TimeSpan.FromSeconds(SleepTimeSeconds));
+            TimeSpan.FromSeconds(Settings.SleepTimeSeconds));
 
         return Task.CompletedTask;
     }
@@ -36,12 +35,6 @@ public class ScreenService : IHostedService, IDisposable
     public void Dispose()
     {
         _timer?.Dispose();
-    }
-
-    private static int GetSleepTime()
-    {
-        var sleepTime = Environment.GetEnvironmentVariable("SLEEP_TIME");
-        return int.TryParse(sleepTime, out var sleepTimeSeconds) ? sleepTimeSeconds : 10;
     }
 }
 

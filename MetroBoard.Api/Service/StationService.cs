@@ -3,17 +3,20 @@ using MetroBoard.Api.Model;
 
 namespace MetroBoard.Api.Service;
 
-public class StationService
+public class StationService : IHostedService, IDisposable
 {
+    private Timer? _timer;
     private StationsInfo? _stationsInfo;
-
+    private TrainPosition[]? _trainPositions;
+    private TrainPrediction[]? _trainPredictions;
+    
     public async Task<Matrix> DrawStationScreenAsync(int remainingTimesToDraw)
     {
         const int displayWidth = 64;
         const int displayHeight = 32;
         _stationsInfo ??= await GetStationsInfo(displayWidth, displayHeight);
 
-        var matrix = Matrix.Create(ScreenService.SleepTimeSeconds);
+        var matrix = Matrix.Create(Settings.SleepTimeSeconds);
 
         // draw stations
         foreach (var (station, coordinate) in _stationsInfo.StationsToNormalizedCoordinates)
@@ -24,12 +27,12 @@ public class StationService
         }
 
         // draw train count
-        var trainPositions = await GetTrainPositionsAsync();
-        DrawTrainCount(matrix, trainPositions);
+        _trainPositions ??= await GetTrainPositionsAsync();
+        DrawTrainCount(matrix, _trainPositions);
 
         // blink stations with an arrival in the next minute
-        var trainPredictions = await GetTrainPredictionsAsync();
-        var stationsWithArrivalsNow = trainPredictions
+        _trainPredictions ??= await GetTrainPredictionsAsync();
+        var stationsWithArrivalsNow = _trainPredictions
             .Where(t => t.Min == "BRD")
             .ToList();
 
@@ -55,6 +58,34 @@ public class StationService
             var selectedLine = lines[remainingTimesToDraw % lines.Count];
             return ColorUtils.LineAbbreviationsToColors[selectedLine].GetPaletteColor();
         }
+    }
+
+    public Task StartAsync(CancellationToken cancellationToken)
+    {
+        _timer = new Timer(UpdateTrainPositions, null, TimeSpan.Zero,
+            TimeSpan.FromSeconds(Settings.SleepTimeSeconds));
+
+        return Task.CompletedTask;
+
+        void UpdateTrainPositions(object? state)
+        {
+            _ = Task.Run(async () =>
+            {
+                _trainPositions = await GetTrainPositionsAsync();
+                _trainPredictions = await GetTrainPredictionsAsync();
+            }, cancellationToken);
+        }
+    }
+
+    public Task StopAsync(CancellationToken cancellationToken)
+    {
+        _timer?.Change(Timeout.Infinite, 0);
+        return Task.CompletedTask;
+    }
+
+    public void Dispose()
+    {
+        _timer?.Dispose();
     }
 
     private static async Task<StationsInfo> GetStationsInfo(int displayWidth, int displayHeight)
@@ -261,6 +292,7 @@ public class StationService
 }
 
 public record Coordinate(double Lat, double Lon);
+
 public record NormalizedCoordinate(int X, int Y);
 
 public record StationsInfo(Dictionary<Station, NormalizedCoordinate> StationsToNormalizedCoordinates);
