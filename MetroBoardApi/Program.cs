@@ -9,7 +9,6 @@ builder.Services.AddHostedService(sp => sp.GetRequiredService<ScreenService>());
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
