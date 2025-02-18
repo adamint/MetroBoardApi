@@ -11,6 +11,13 @@ public class BoardController(ScreenService screenService) : ControllerBase
     private StationService StationService { get; } = new();
     private ArrivalsService ArrivalsService { get; } = new();
 
+    [HttpGet("ReportError")]
+    public string ReportError(string error)
+    {
+        Console.WriteLine("WARNING: an unhandled error was reported - " + error);
+        return "ok";
+    }
+
     [HttpGet("CurrentScreen")]
     public async Task<Matrix> GetCurrentScreen()
     {
